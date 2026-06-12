@@ -3,151 +3,195 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>Acesso Liberado</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init', '37425935325492192');
-fbq('track', 'PageView');
-
-window.addEventListener('load', function () {
-  fbq('track', 'ViewContent');
-  fbq('track', 'InitiateCheckout');
-});
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=37425935325492192&ev=PageView&noscript=1"/></noscript>
-
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: #050505;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
-.wrapper {
-  text-align: center;
-  padding: 40px 30px;
-  max-width: 420px;
-  width: 100%;
+
+body{
+  background:#050505;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.lock-icon {
-  font-size: 64px;
-  margin-bottom: 24px;
-  display: block;
-  animation: bounce 1s infinite alternate;
+
+.wrapper{
+  text-align:center;
+  padding:40px 30px;
+  max-width:420px;
+  width:100%;
 }
-@keyframes bounce {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
+
+.lock-icon{
+  font-size:64px;
+  margin-bottom:24px;
+  animation:bounce 1s infinite alternate;
 }
-h1 {
-  font-size: 26px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  line-height: 1.2;
+
+@keyframes bounce{
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.1);
+  }
 }
-p {
-  color: #aaa;
-  font-size: 15px;
-  margin-bottom: 36px;
-  line-height: 1.6;
+
+h1{
+  font-size:26px;
+  font-weight:800;
+  margin-bottom:12px;
+  line-height:1.2;
 }
-.counter-box {
-  background: #111;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 28px;
+
+p{
+  color:#aaa;
+  font-size:15px;
+  margin-bottom:36px;
+  line-height:1.6;
 }
-.counter-label {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 10px;
+
+.counter-box{
+  background:#111;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
+  margin-bottom:28px;
 }
-.counter-number {
-  font-size: 72px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-  transition: all 0.3s ease;
+
+.counter-label{
+  font-size:14px;
+  color:#888;
+  margin-bottom:10px;
 }
-.counter-number.pulse {
-  transform: scale(1.15);
-  color: #2AABEE;
+
+.counter-number{
+  font-size:72px;
+  font-weight:800;
+  line-height:1;
 }
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: #222;
-  border-radius: 99px;
-  margin-top: 20px;
-  overflow: hidden;
+
+.progress-bar{
+  width:100%;
+  height:6px;
+  background:#222;
+  border-radius:99px;
+  margin-top:20px;
+  overflow:hidden;
 }
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #2AABEE, #1a8fd1);
-  border-radius: 99px;
-  width: 0%;
-  transition: width 3s linear;
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2AABEE,#1a8fd1);
+  transition:width 3s linear;
 }
-.footer {
-  margin-top: 24px;
-  color: #555;
-  font-size: 12px;
+
+.footer{
+  margin-top:24px;
+  color:#555;
+  font-size:12px;
+}
+
+.telegram-btn{
+  display:inline-block;
+  background:#2AABEE;
+  color:#fff;
+  text-decoration:none;
+  padding:16px 28px;
+  border-radius:14px;
+  font-weight:700;
+  font-size:16px;
 }
 </style>
 </head>
-<body>
-<div class="wrapper">
-  <span class="lock-icon">🔓</span>
-  <h1>Seu acesso está sendo liberado...</h1>
-  <p>Você será redirecionado para o Telegram automaticamente.</p>
 
-  <div class="counter-box">
-    <div class="counter-label">Redirecionando em</div>
-    <div class="counter-number" id="counter">3</div>
+<body>
+
+<div class="wrapper">
+
+  <div class="lock-icon">🔓</div>
+
+  <h1>Seu acesso está sendo liberado...</h1>
+
+  <p>
+    Clique no botão abaixo para entrar no Telegram.
+  </p>
+
+  <div class="counter-box" id="counterBox">
+
+    <div class="counter-label">
+      Redirecionando em
+    </div>
+
+    <div class="counter-number" id="counter">
+      3
+    </div>
+
     <div class="progress-bar">
       <div class="progress-fill" id="progress"></div>
     </div>
+
   </div>
 
-  <div class="footer">Acesso exclusivo • Conteúdo +18</div>
+  <div class="footer">
+    Acesso exclusivo • Conteúdo +18
+  </div>
+
 </div>
 
 <script>
-  var TELEGRAM = 'https://t.me/Hqproibidas_bot';
-  var count = 3;
-  var el = document.getElementById('counter');
-  var progress = document.getElementById('progress');
+const TELEGRAM = "https://t.me/Hqproibidas_bot";
 
-  setTimeout(function() { progress.style.width = '100%'; }, 100);
+let count = 3;
 
-  var interval = setInterval(function() {
-    count--;
-    el.classList.add('pulse');
-    setTimeout(function() { el.classList.remove('pulse'); }, 300);
-    if (count <= 0) {
-      clearInterval(interval);
-      el.textContent = '✓';
-      window.location.href = TELEGRAM;
-    } else {
-      el.textContent = count;
-    }
-  }, 1000);
+const counter = document.getElementById("counter");
+const progress = document.getElementById("progress");
+const counterBox = document.getElementById("counterBox");
+
+setTimeout(function(){
+  progress.style.width = "100%";
+},100);
+
+const interval = setInterval(function(){
+
+  count--;
+
+  if(count <= 0){
+
+    clearInterval(interval);
+
+    counterBox.innerHTML = `
+      <div style="font-size:16px;color:#aaa;margin-bottom:18px;">
+        Seu acesso foi liberado
+      </div>
+
+      <a href="${TELEGRAM}" class="telegram-btn">
+        ENTRAR NO TELEGRAM
+      </a>
+    `;
+
+  }else{
+
+    counter.textContent = count;
+
+  }
+
+},1000);
 </script>
+
 </body>
 </html>
+
