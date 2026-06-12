@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -39,15 +40,9 @@
 
 fbq('init', '37425935325492192');
 
+/* DISPARA SOMENTE PAGEVIEW */
 fbq('track', 'PageView');
 
-window.addEventListener('load', function () {
-
-  fbq('track', 'ViewContent');
-
-  fbq('track', 'InitiateCheckout');
-
-});
 </script>
 
 <noscript>
@@ -242,7 +237,10 @@ const interval = setInterval(function(){
 
       <a href="${TELEGRAM}"
          class="telegram-btn"
-         onclick="fbq('track', 'Lead');">
+         onclick="
+           fbq('track', 'InitiateCheckout');
+           fbq('track', 'Lead');
+         ">
          ENTRAR NO TELEGRAM
       </a>
     `;
