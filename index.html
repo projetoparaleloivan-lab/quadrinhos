@@ -9,6 +9,53 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{
+  if(f.fbq)return;
+
+  n=f.fbq=function(){
+    n.callMethod ?
+    n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+  };
+
+  if(!f._fbq)f._fbq=n;
+
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s);
+
+}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '37425935325492192');
+
+fbq('track', 'PageView');
+
+window.addEventListener('load', function () {
+
+  fbq('track', 'ViewContent');
+
+  fbq('track', 'InitiateCheckout');
+
+});
+</script>
+
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=37425935325492192&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel -->
+
 <style>
 *{
   margin:0;
@@ -36,6 +83,7 @@ body{
 .lock-icon{
   font-size:64px;
   margin-bottom:24px;
+  display:block;
   animation:bounce 1s infinite alternate;
 }
 
@@ -80,7 +128,14 @@ p{
 .counter-number{
   font-size:72px;
   font-weight:800;
+  color:#fff;
   line-height:1;
+  transition:all 0.3s ease;
+}
+
+.counter-number.pulse{
+  transform:scale(1.15);
+  color:#2AABEE;
 }
 
 .progress-bar{
@@ -94,8 +149,9 @@ p{
 
 .progress-fill{
   height:100%;
-  width:0%;
   background:linear-gradient(90deg,#2AABEE,#1a8fd1);
+  border-radius:99px;
+  width:0%;
   transition:width 3s linear;
 }
 
@@ -122,7 +178,7 @@ p{
 
 <div class="wrapper">
 
-  <div class="lock-icon">🔓</div>
+  <span class="lock-icon">🔓</span>
 
   <h1>Seu acesso está sendo liberado...</h1>
 
@@ -133,7 +189,7 @@ p{
   <div class="counter-box" id="counterBox">
 
     <div class="counter-label">
-      Redirecionando em
+      Liberando acesso em
     </div>
 
     <div class="counter-number" id="counter">
@@ -169,6 +225,12 @@ const interval = setInterval(function(){
 
   count--;
 
+  counter.classList.add("pulse");
+
+  setTimeout(function(){
+    counter.classList.remove("pulse");
+  },300);
+
   if(count <= 0){
 
     clearInterval(interval);
@@ -178,8 +240,10 @@ const interval = setInterval(function(){
         Seu acesso foi liberado
       </div>
 
-      <a href="${TELEGRAM}" class="telegram-btn">
-        ENTRAR NO TELEGRAM
+      <a href="${TELEGRAM}"
+         class="telegram-btn"
+         onclick="fbq('track', 'Lead');">
+         ENTRAR NO TELEGRAM
       </a>
     `;
 
