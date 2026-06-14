@@ -15,11 +15,23 @@ fbq('track', 'PageView');
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;}
-.wrapper{text-align:center;padding:40px 30px;max-width:420px;width:100%;}
+.wrapper{text-align:center;padding:40px 20px;max-width:480px;width:100%;}
 .lock-icon{font-size:64px;margin-bottom:24px;display:block;animation:bounce 1s infinite alternate;}
 @keyframes bounce{from{transform:scale(1);}to{transform:scale(1.1);}}
-h1{font-size:26px;font-weight:800;margin-bottom:12px;line-height:1.2;}
-p{color:#aaa;font-size:15px;margin-bottom:36px;line-height:1.6;}
+h1{font-size:24px;font-weight:800;margin-bottom:12px;line-height:1.2;}
+.subtitle{color:#aaa;font-size:15px;margin-bottom:28px;line-height:1.6;}
+
+/* Carrossel */
+.carousel{position:relative;width:100%;margin-bottom:28px;border-radius:16px;overflow:hidden;background:#111;}
+.carousel-track{display:flex;transition:transform 0.4s ease;}
+.carousel-track img{width:100%;flex-shrink:0;object-fit:cover;border-radius:16px;}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:22px;padding:8px 14px;cursor:pointer;border-radius:8px;z-index:10;}
+.carousel-btn.prev{left:8px;}
+.carousel-btn.next{right:8px;}
+.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:10px;}
+.dot{width:8px;height:8px;border-radius:50%;background:#444;cursor:pointer;transition:background 0.3s;}
+.dot.active{background:#2AABEE;}
+
 .counter-box{background:#111;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;margin-bottom:28px;}
 .counter-label{font-size:14px;color:#888;margin-bottom:10px;}
 .counter-number{font-size:72px;font-weight:800;color:#fff;line-height:1;transition:all 0.3s ease;}
@@ -34,7 +46,22 @@ p{color:#aaa;font-size:15px;margin-bottom:36px;line-height:1.6;}
 <div class="wrapper">
   <span class="lock-icon">🔓</span>
   <h1>Seu acesso está sendo liberado...</h1>
-  <p>Clique no botão abaixo para entrar no Telegram.</p>
+  <p class="subtitle">Confira a prévia exclusiva abaixo e entre no Telegram para ver tudo.</p>
+
+  <div class="carousel">
+    <div class="carousel-track" id="track">
+      <img src="https://raw.githubusercontent.com/projetoparaleloivan-lab/quadrinhos/main/page01.jpg" alt="page 1"/>
+      <img src="https://raw.githubusercontent.com/projetoparaleloivan-lab/quadrinhos/main/page02.jpg" alt="page 2"/>
+      <img src="https://raw.githubusercontent.com/projetoparaleloivan-lab/quadrinhos/main/page03.jpg" alt="page 3"/>
+      <img src="https://raw.githubusercontent.com/projetoparaleloivan-lab/quadrinhos/main/page04.jpg" alt="page 4"/>
+      <img src="https://raw.githubusercontent.com/projetoparaleloivan-lab/quadrinhos/main/page05.jpg" alt="page 5"/>
+      <img src="https://raw.githubusercontent.com/projetoparaleloivan-lab/quadrinhos/main/page06.jpg" alt="page 6"/>
+    </div>
+    <button class="carousel-btn prev" onclick="slide(-1)">&#8249;</button>
+    <button class="carousel-btn next" onclick="slide(1)">&#8250;</button>
+  </div>
+  <div class="carousel-dots" id="dots"></div>
+
   <div class="counter-box" id="counterBox">
     <div class="counter-label">Liberando acesso em</div>
     <div class="counter-number" id="counter">3</div>
@@ -44,6 +71,33 @@ p{color:#aaa;font-size:15px;margin-bottom:36px;line-height:1.6;}
 </div>
 <script>
 const TELEGRAM = "https://t.me/Hqproibidas_bot";
+const total = 6;
+let current = 0;
+
+const track = document.getElementById("track");
+const dotsContainer = document.getElementById("dots");
+
+for(let i=0;i<total;i++){
+  const d = document.createElement("div");
+  d.className = "dot" + (i===0?" active":"");
+  d.onclick = ()=>goTo(i);
+  dotsContainer.appendChild(d);
+}
+
+function goTo(n){
+  current = n;
+  track.style.transform = `translateX(-${current*100}%)`;
+  document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===current));
+}
+
+function slide(dir){
+  goTo((current+dir+total)%total);
+}
+
+// Auto slide
+setInterval(()=>slide(1), 3000);
+
+// Counter
 let count = 3;
 const counter = document.getElementById("counter");
 const progress = document.getElementById("progress");
@@ -57,7 +111,7 @@ const interval = setInterval(function(){
     clearInterval(interval);
     counterBox.innerHTML = `
       <div style="font-size:16px;color:#aaa;margin-bottom:18px;">Seu acesso foi liberado</div>
-      <a href="${TELEGRAM}" class="telegram-btn" onclick="fbq('track', 'Lead');">ENTRAR NO TELEGRAM</a>
+      <a href="${TELEGRAM}" class="telegram-btn" onclick="fbq('track','Lead');">ENTRAR NO TELEGRAM</a>
     `;
   } else {
     counter.textContent = count;
