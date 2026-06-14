@@ -120,7 +120,7 @@ function goTo(n){
   document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===current));
 }
 function slide(dir){ goTo((current+dir+total)%total); }
-setInterval(()=>slide(1),3000);
+
 </script>
 </body>
 </html>
