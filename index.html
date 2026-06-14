@@ -15,7 +15,7 @@ window.addEventListener('load', function(){
   document.querySelector('.floating-btn').addEventListener('click', function(e){
     e.preventDefault();
     var dest = this.href;
-    fbq('track', 'Lead');
+    fbq('track', 'InitiateCheckout', {value:19.90, currency:'BRL'});
     setTimeout(function(){ window.location.href = dest; }, 350);
   });
 });
